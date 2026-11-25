@@ -8,21 +8,21 @@ def cmd_start(args):
     """Start a production."""
     status = director.start_production(args.production)
     print(f"Start status: {status}")
-    return 0 if status == "1" else 1
+    return 0 if str(status) == "1" else 1
 
 
 def cmd_stop(args):
     """Stop the running production."""
     status = director.stop_production(timeout=args.timeout, force=args.force)
     print(f"Stop status: {status}")
-    return 0 if status == "1" else 1
+    return 0 if str(status) == "1" else 1
 
 
 def cmd_restart(args):
     """Restart the running production."""
     status = director.restart_production(timeout=args.timeout, force=args.force)
     print(f"Restart status: {status}")
-    return 0 if status == "1" else 1
+    return 0 if str(status) == "1" else 1
 
 
 def cmd_status(args):
@@ -42,7 +42,7 @@ def cmd_status(args):
     print(f"Status: {status}")
     print(f"Production: {prod_name if prod_name else 'None'}")
     print(f"State: {state_map.get(str(state), f'Unknown ({state})')}")
-    return 0 if status == "1" else 1
+    return 0 if str(status) == "1" else 1
 
 
 def cmd_clean(args):
@@ -54,7 +54,7 @@ def cmd_clean(args):
 
     status = director.clean_production(kill_app_data_too=args.kill_data)
     print(f"Clean status: {status}")
-    return 0 if status == "1" else 1
+    return 0 if str(status) == "1" else 1
 
 
 def cmd_update(args):
@@ -65,7 +65,7 @@ def cmd_update(args):
         called_by_schedule_handler=False
     )
     print(f"Update status: {status}")
-    return 0 if status == "1" else 1
+    return 0 if str(status) == "1" else 1
 
 
 def cmd_enable(args):
@@ -77,7 +77,7 @@ def cmd_enable(args):
     )
     action = "enabled" if args.enable else "disabled"
     print(f"Config item '{args.item}' {action}: {status}")
-    return 0 if status == "1" else 1
+    return 0 if str(status) == "1" else 1
 
 
 def cmd_list(args):
@@ -96,7 +96,7 @@ def cmd_list(args):
             print(f"    Last stopped: {details.get('last_stop_time', 'N/A')}")
             print()
 
-    return 0 if status == "1" else 1
+    return 0 if str(status) == "1" else 1
 
 
 def cmd_messages(args):
